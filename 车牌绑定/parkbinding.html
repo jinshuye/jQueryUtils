@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>添加车辆</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="css/binding.css">
+<link rel="stylesheet" type="text/css" href="layer_mobile/need/layer.css">
+</head>
+<body>
+	<div class="">
+		<div class="che_tit">请输入车牌</div>
+		<div class="car_input">
+			<ul class="clearfix ul_input">
+				<li class="input_pro"><span></span></li>
+				<li class="input_pp input_zim"><span></span></li>
+				<li class="input_pp"><span></span></li>
+				<li class="input_pp"><span></span></li>
+				<li class="input_pp"><span></span></li>
+				<li class="input_pp"><span></span></li>
+				<li class="input_pp"><span></span></li>
+			</ul>
+		</div>
+	</div>
+	<div class="ck"><input type="checkbox">新能源车</div>
+	<div style="text-align: center;">
+
+			<div class="save_car" >保存</div>
+			<div class="look_car" onclick="window.location.href = '/index';">查看车辆信息</div>
+			<div class="msg_car" >温馨提示:<br>同一车牌限绑一次。</div>
+	</div>
+	<div id="jp_pro"></div>
+
+</body>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/mui.min.js"></script>
+<script type="text/javascript" src="layer_mobile/layer.js"></script>
+<script type="text/javascript" src="js/binding.js"></script>
+<script type="text/javascript">
+$(function(){
+    $("input[type=checkbox]").click(function(){
+        var str = '<li class="input_pp last_pp"><span></span></li>';
+        var liNum = $(".ul_input").find("span").text().length-1;
+        if($(this).is(":checked")){
+        
+            $("#cb1").attr("checked",false);
+            $(".ul_input").append(str);
+            
+            next = liNum;
+            
+            //灰
+            $(".save_car").css("color","#ffffff");
+			$(".save_car").css("background","#c0c0c0");
+        }else{
+        
+            $("#cb1").attr("checked",true);
+            $(".ul_input").find(".last_pp").remove();
+            
+            var pai = $(".car_input").attr("data-pai");
+            if(pai!=null){
+	            pai=pai.replace(/(^\s*)|(\s*$)/g,"");            	
+            }
+            console.log(liNum);
+            if(liNum>6){
+                
+                pai=pai.substring(0,pai.length-1);
+                $(".car_input").attr("data-pai",pai);
+                	
+            }
+        }
+    });
+});
+
+</script>
+</html>
